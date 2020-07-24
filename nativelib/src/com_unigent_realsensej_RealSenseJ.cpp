@@ -137,9 +137,24 @@ JNIEXPORT jobjectArray JNICALL Java_com_unigent_realsensej_RealSenseJ_getFrames
     // 2. Depth
 
     // 2.1 Depth raw (Z16)
-    int depth_length_raw = aligned_depth_frame.get_width() * aligned_depth_frame.get_height() * aligned_depth_frame.get_bytes_per_pixel();
-    jbyteArray depthRawArray = env->NewByteArray(depth_length_raw);
-    env->SetByteArrayRegion(depthRawArray, 0, depth_length_raw, (const jbyte*) aligned_depth_frame.get_data());
+    int depth_frame_width = aligned_depth_frame.get_width();
+    int depth_frame_height = aligned_depth_frame.get_height();
+    int num_of_depth_pixels = depth_frame_width * depth_frame_height;
+    auto * distanceImage = new jbyte[num_of_depth_pixels * 2];
+
+    int idx = 0;
+    for(int r=0; r<aligned_depth_frame.get_height(); r++) {
+        for(int c=0; c<aligned_depth_frame.get_width(); c++) {
+            auto depth_mm = (unsigned short int) (aligned_depth_frame.get_distance(c, r) * 1000);
+            distanceImage[idx] = (char) (depth_mm >> 8);
+            distanceImage[idx + 1] = (char) (depth_mm & 0xFF);
+            idx += 2;
+        }
+    }
+    int numOfDepthBytes = num_of_depth_pixels * 2;
+    jbyteArray depthDataArray = env->NewByteArray(numOfDepthBytes);
+    env->SetByteArrayRegion(depthDataArray, 0, numOfDepthBytes, distanceImage);
+    delete distanceImage;
 
     // 2.1 Depth colorized
     rs2::video_frame colorizedDepthFrame = colorizer.colorize(aligned_depth_frame);
@@ -151,7 +166,7 @@ JNIEXPORT jobjectArray JNICALL Java_com_unigent_realsensej_RealSenseJ_getFrames
 
     env->SetObjectArrayElement(result, 0, rgbArray);
     env->SetObjectArrayElement(result, 1, depthColorizedArray);
-    env->SetObjectArrayElement(result, 2, depthRawArray);
+    env->SetObjectArrayElement(result, 2, depthDataArray);
 
     return result;
 }

@@ -37,6 +37,14 @@ int main(int argc, char * argv[]) try {
             rs2::video_frame rgb_frame = frames.get_color_frame();
             std::cout << "RGB frame: h=" << rgb_frame.get_height() << " w=" << rgb_frame.get_width() << std::endl;
 
+
+            // Aligned frames
+            rs2::align align(RS2_STREAM_COLOR);
+            auto aligned_frames = align.process(frames);
+            rs2::video_frame aligned_color_frame = aligned_frames.first(RS2_STREAM_COLOR);
+            rs2::depth_frame aligned_depth_frame = aligned_frames.get_depth_frame();
+            std::cout << "Aligned (meters): 236,116: " << aligned_depth_frame.get_distance(236, 116) << std::endl;
+
             success_cnt ++;
 
             std::this_thread::sleep_for( std::chrono::milliseconds(200));
