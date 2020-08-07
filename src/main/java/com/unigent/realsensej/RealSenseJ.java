@@ -3,8 +3,6 @@ package com.unigent.realsensej;
 /**
  * Intel RealSense JNI Adaptor 
  *
- * AgentBase Robot Platform, Unigent Robotics, <a href="http://unigent.com">Unigent</a>
- *
  * @author terranfounder
  *
  */

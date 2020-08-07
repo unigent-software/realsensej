@@ -1,7 +1,6 @@
 #include <iostream>
 
 //
-// AgentBase Robot Platform, Unigent Robotics, <a href="http://unigent.com">Unigent</a>
 // @author terranfounder
 //
 
