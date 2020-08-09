@@ -1,6 +1,6 @@
 # realsensej
 
-This is a very basic JNI adapter for Intel RealSense library. Here is an example on how to use it:
+This is a very basic Java (JNI) adapter for Intel RealSense library. Here is an example on how to use it:
 (Make sure realsensej and realsense2 libraries are in your JVM's library path)
 
 ```
