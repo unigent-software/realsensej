@@ -17,4 +17,8 @@ BufferedImage depthZ16 = depthToImage(depthBytesToDepthMatrix(frames[2]));
 realSenseJ.closePipe();
 ```
 
-The natrive lib is built for Linux x64 and Raspberry Pi 4 but it's easy to build it for other systems.
+The native lib is built for Linux x64 and Raspberry Pi 4 but it's easy to build it for other systems.
+
+**NOTE** Before using this, you need to make sure LibRealSense2 from Intel is installed on your system.
+Follow https://github.com/IntelRealSense/librealsense/
+
