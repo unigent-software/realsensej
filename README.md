@@ -22,3 +22,5 @@ The native lib is built for Linux x64 and Raspberry Pi 4 but it's easy to build 
 **NOTE** Before using this, you need to make sure LibRealSense2 from Intel is installed on your system.
 Follow https://github.com/IntelRealSense/librealsense/
 
+**NOTE for Pi** When configuring CMake, make sure to set CMAKE_CXX_FLAGS to "-fPIC" to avoid compilation errors. You may need to check "Advanced" checkbox in CMake GUI. 
+
