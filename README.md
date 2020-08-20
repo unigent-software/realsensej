@@ -19,6 +19,8 @@ realSenseJ.closePipe();
 
 The native lib is built for Linux x64 and Raspberry Pi 4 but it's easy to build it for other systems.
 
+It was tested on D435 and SR300 Intel RealSense cameras. 
+
 **NOTE** Before using this, you need to make sure LibRealSense2 from Intel is installed on your system.
 Follow https://github.com/IntelRealSense/librealsense/
 
